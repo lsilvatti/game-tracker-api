@@ -1,8 +1,8 @@
 import { type Request, type Response, type NextFunction } from 'express';
-import { ValidationError } from 'joi';
+import joi from 'joi';
 
 function errorMiddleware(err: unknown, req: Request, res: Response, next: NextFunction) {
-    if (err instanceof ValidationError) {
+    if (err instanceof joi.ValidationError) {
         return res.status(400).json({
             error: 'ValidationError',
             message: err.details.map(detail => detail.message).join(', '),
