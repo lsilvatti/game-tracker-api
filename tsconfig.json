@@ -3,8 +3,14 @@
   "compilerOptions": {
     // File Layout
     "rootDir": "src",
-    // "outDir": "./dist",
+    "baseUrl": "./",
 
+    "paths":{ 
+      "@controllers/*" : ["src/controllers/*"],
+      "@routes/*": ["src/routes/*"],
+      "@schemas/*": ["src/schemas/*"],
+    },
+  
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
@@ -29,7 +35,7 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,  
   },
 
   "include": ["src/**/*"],
