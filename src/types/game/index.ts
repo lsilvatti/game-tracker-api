@@ -13,8 +13,6 @@ export enum GamePlatforms {
     NINTENDO_64 = "N64"
 }
 
-
-
 export interface Game { 
     id: string,
     title: string,
@@ -22,4 +20,6 @@ export interface Game {
     genre: string,
     status: GameCurrentState,
 }
+
+export type CreateGameDTO = Omit<Game, "id">;
 
