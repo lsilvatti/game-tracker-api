@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "A backend study",
   "type": "module",
-  "main": "app.ts",
+  "main": "src/server.ts",
   "scripts": {
-    "dev": "tsx watch app.ts",
-    "start": "tsx app.ts"
+    "dev": "tsx watch src/server.ts",
+    "start": "tsx src/server.ts"
   },
   "dependencies": {
     "dotenv": "^17.3.0",
