@@ -10,6 +10,7 @@
       "@routes/*": ["src/routes/*"],
       "@schemas/*": ["src/schemas/*"],
       "@services/*": ["src/services/*"],
+      "@repositories/*": ["src/repositories/*"],
       "@middlewares/*": ["src/middlewares/*"],
     },
   
