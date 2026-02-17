@@ -1,0 +1,188 @@
+components:
+  schemas:
+    Game:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique game identifier (UUID)
+        title:
+          type: string
+          description: Game title
+          example: "Super Mario World"
+        year:
+          type: integer
+          description: Release year of the game
+          example: 1990
+        platform:
+          type: string
+          description: Game platform
+          example: "SNES"
+          values: ["NES", "SNES", "Mega Drive", "GameBoy", "PS1", "N64"]
+        genre:
+          type: array
+          items:
+            type: string
+          description: Game genres
+          example: ["Platformer", "Adventure"]
+        status:
+          type: string
+          description: Current status of the game
+          example: "playing"
+          values: ["backlog", "playing", "completed"]
+
+paths:
+  /games:
+    post:
+      summary: Adds a new game
+      tags: 
+        - Games
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+                - year
+                - platform
+                - genre
+              properties:
+                title:
+                  type: string
+                  minLength: 3
+                  example: "Super Metroid"
+                year:
+                  type: integer
+                  minimum: 1958
+                  maximum: "Current Year"
+                  example: 1994
+                platform:
+                  type: string
+                  example: "SNES"
+                genre:
+                  type: array
+                  items:
+                    type: string
+                  example: ["Action", "Adventure"]
+                status:
+                  type: string
+                  example: "backlog"
+      responses:
+        '201':
+          description: Game created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+                
+    get:
+      summary: Returns a list of all games
+      tags: 
+        - Games
+      responses:
+        '200':
+          description: List of games returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Game'
+
+  /games/{id}:
+    delete:
+      summary: Deletes a game by ID
+      tags: 
+        - Games
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: Unique game ID
+      responses:
+        '204':
+          description: Game deleted successfully (No content)
+        '404':
+          description: Game not found
+
+  /games/search:
+    get:
+      summary: Searches for games based on partial filters
+      tags: 
+        - Games
+      parameters:
+        - in: query
+          name: title
+          schema:
+            type: string
+          description: Filter by title
+        - in: query
+          name: year
+          schema:
+            type: integer
+          description: Filter by release year
+        - in: query
+          name: platform
+          schema:
+            type: string
+          description: Filter by platform
+        - in: query
+          name: genre
+          schema:
+            type: string
+          description: Filter by genre
+        - in: query
+          name: status
+          schema:
+            type: string
+          description: Filter by current status
+      responses:
+        '200':
+          description: Filtered list of games returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Game'
+
+  /games/{id}/status:
+    patch:
+      summary: Updates the current status of a game
+      tags: 
+        - Games
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: Unique game ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - status
+              properties:
+                status:
+                  type: string
+                  example: "completed"
+      responses:
+        '200':
+          description: Status updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '404':
+          description: Game not found
