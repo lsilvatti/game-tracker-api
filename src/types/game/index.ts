@@ -17,7 +17,7 @@ export interface Game {
     id: string,
     title: string,
     platform: GamePlatforms,
-    genre: string,
+    genre: string[],
     status: GameCurrentState,
 }
 
