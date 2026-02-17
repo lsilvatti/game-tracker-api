@@ -5,7 +5,6 @@ export interface IGameService {
     getAllGames: () => Promise<Game[]>;
     addGame: (game: CreateGameDTO) => Promise<Game>;
     deleteGame: (id: string) => Promise<boolean>;
-    findGame: (parameters: Partial<Game>) => Promise<Game | undefined>;
     findGames: (parameters: Partial<Game>) => Promise<Game[]>;
 }
 
@@ -28,10 +27,6 @@ export default function gameService(repository: IGameRepository): IGameService {
         return await repository.deleteGame(id);
     };
 
-    const findGame = async (parameters: Partial<Game>) => {
-        return await repository.findGame(parameters);
-    };
-
     const findGames = async (parameters: Partial<Game>) => {
         return await repository.findGames(parameters);
     };
@@ -40,7 +35,6 @@ export default function gameService(repository: IGameRepository): IGameService {
         getAllGames,
         addGame,
         deleteGame,
-        findGame,
         findGames
     }); 
 }

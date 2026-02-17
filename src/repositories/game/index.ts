@@ -6,7 +6,6 @@ export interface IGameRepository {
     getAllGames: () => Promise<Game[]>;
     addGame: (game: Game) => Promise<Game>;
     deleteGame: (id: string) => Promise<boolean>;
-    findGame: (parameters: Partial<Game>) => Promise<Game | undefined>;
     findGames: (parameters: Partial<Game>) => Promise<Game[]>;
 }
 
@@ -30,14 +29,6 @@ export default function GameRepository(): IGameRepository {
         return false;
     }
 
-    const findGame = async (parameters: Partial<Game>): Promise<Game | undefined> => {
-        return games.find((game) => {
-            return Object.entries(parameters).every(([key, value]) => {
-                return game[key as keyof Game] === value;
-            });
-        });
-    };
-
     const findGames = async (parameters: Partial<Game>): Promise<Game[]> => {
         return games.filter((game) => {
             return Object.entries(parameters).every(([key, value]) => {
@@ -50,7 +41,6 @@ export default function GameRepository(): IGameRepository {
         getAllGames,
         addGame,
         deleteGame,
-        findGame,
         findGames
     });
 }
