@@ -1,36 +1,38 @@
-import { AppDataSource } from "./config/data-source";
-import { setupSwagger } from './config/swagger.js';
-import app from "./app";
+import app from "./app.js";
+import { setupSwagger } from '@config/swagger.js';
+import { connectDatabase, sequelize } from "@config/database.js";
 
 const PORT = process.env.PORT || 3000;
 
 const startServer = async () => {
     try {
-        await AppDataSource.initialize();
-
-        console.log("🔥 Database connected!");
+        await connectDatabase();
 
         if (process.env.NODE_ENV !== 'production') {
             setupSwagger(app);
-            console.log('📚 Swagger documentation available at: http://localhost:3000/api-docs');
+            console.log(`📚 Swagger documentation available at: http://localhost:${PORT}/api-docs`);
         }
 
         const server = app.listen(PORT, () => {
             console.log(`🚀 Server running on port ${PORT}`);
         });
 
-        const gracefulShutdown = async (signal: string) => {
+        const gracefulShutdown = (signal: string) => {
             console.log(`\n🛑 Signal ${signal} received. Initiating graceful shutdown...`);
+
+            const forceExit = setTimeout(() => {
+                console.error("❌ Shutdown timed out. Forcing exit.");
+                process.exit(1);
+            }, 10000);
 
             server.close(async () => {
                 console.log("HTTP Server closed.");
 
                 try {
-                    if (AppDataSource.isInitialized) {
-                        await AppDataSource.destroy();
-                        console.log("Database disconnected.");
-                    }
-
+                    await sequelize.close();
+                    console.log("Database connection pool closed.");
+                    
+                    clearTimeout(forceExit);
                     console.log("✅ Shutdown complete. Goodbye!");
                     process.exit(0);
                 } catch (error) {
@@ -39,6 +41,7 @@ const startServer = async () => {
                 }
             });
         };
+
         process.on("SIGINT", () => gracefulShutdown("SIGINT"));
         process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
 

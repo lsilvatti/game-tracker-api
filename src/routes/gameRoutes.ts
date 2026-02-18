@@ -1,13 +1,13 @@
 import { Router } from 'express';
 
-import bodyValidationMiddleware from '@middlewares/bodyValidation/index.js';
-import { gameSchema, gameQuerySchema, gameStatusUpdateSchema, idParamSchema } from '@schemas/game/index.js';
+import bodyValidationMiddleware from '@middlewares/validation/bodyValidation.js';
+import { gameSchema, gameQuerySchema, gameStatusUpdateSchema, idParamSchema } from '@schemas/gameSchemas.js';
 
-import GameRepository from '@repositories/game/index.js';
-import GameService from '@services/game/index.js';
-import GameController from '@controllers/game/index.js';
-import queryValidationMiddleware from '@middlewares/queryValidation/index.js';
-import paramValidationMiddleware from '@middlewares/paramValidation/index.js';
+import GameRepository from '@repositories/gameRepository.js';
+import GameService from '@services/gameService.js';
+import GameController from '@controllers/gameController.js';
+import queryValidationMiddleware from '@middlewares/validation/queryValidation.js';
+import paramValidationMiddleware from '@middlewares/validation/paramValidation.js';
 
 const repository = GameRepository();
 const service = GameService(repository);

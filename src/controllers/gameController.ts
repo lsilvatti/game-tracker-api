@@ -1,5 +1,5 @@
 import { type Request, type Response, type NextFunction } from 'express';
-import { type IGameService } from '@services/game/index.js';
+import { type IGameService } from '@services/gameService.js';
 
 export default function GameController(service: IGameService) { 
     const getAllGames = async (req: Request, res: Response, next: NextFunction) => {

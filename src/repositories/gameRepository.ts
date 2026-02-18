@@ -1,9 +1,8 @@
-import game from '@routes/game/index.js';
-import { GameCurrentState, type Game } from '../../types/game/index.js';
+import { type Game } from '../types/game/index.js';
 
 const games: Game[] = [];
 
-export interface IGameRepository {
+export interface GameRepository {
     getAllGames: () => Promise<Game[]>;
     addGame: (game: Game) => Promise<Game>;
     updateGame: (id: string, updatedFields: Partial<Game>) => Promise<Game | null>;
@@ -11,7 +10,7 @@ export interface IGameRepository {
     findGames: (parameters: Partial<Game>) => Promise<Game[]>;
 }
 
-export default function GameRepository(): IGameRepository {
+export default function GameRepository(): GameRepository {
     
     const getAllGames = async (): Promise<Game[]> => {
         return [...games];

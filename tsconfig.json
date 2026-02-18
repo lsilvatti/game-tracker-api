@@ -1,11 +1,6 @@
 {
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "target": "ES2023",
-    "strict": true,
-    "esModuleInterop": true,
     // File Layout
     "rootDir": "src",
     "baseUrl": "./",
@@ -13,17 +8,21 @@
     "paths":{ 
       "@controllers/*" : ["src/controllers/*"],
       "@routes/*": ["src/routes/*"],
+      "@config/*": ["src/config/*"],
       "@helpers/*": ["src/helpers/*"],
       "@schemas/*": ["src/schemas/*"],
+      "@entities/*": ["src/entities/*"],
       "@services/*": ["src/services/*"],
       "@repositories/*": ["src/repositories/*"],
       "@middlewares/*": ["src/middlewares/*"],
-      "@prisma/*": ["prisma/*"],
-      "@lib/*": ["src/lib/*"]
+      "@utils/*": ["src/utils/*"],
     },
   
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
+    "module": "nodenext",
+    "moduleResolution": "NodeNext",
+    "target": "esnext",
     "lib": ["esnext"],
     "types": ["node"],
 
@@ -35,13 +34,19 @@
     // Stricter Typechecking Options
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
+
+    "strict": true,
     "jsx": "react-jsx",
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true
+    "esModuleInterop": true,  
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
+    "experimentalDecorators": true,
   },
 
   "include": ["src/**/*"],

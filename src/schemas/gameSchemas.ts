@@ -1,6 +1,6 @@
 import joi from 'joi';
 
-import { GamePlatforms, GameCurrentState } from 'src/types/index.js';
+import { GamePlatforms, GameCurrentState } from '../types/game/index.js';
 
 const currentYear = new Date(Date.now()).getFullYear();
 

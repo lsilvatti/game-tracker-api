@@ -1,6 +1,6 @@
 import { type Request, type Response, type NextFunction } from 'express';
 import joi from 'joi';
-import type { IApiError } from 'src/helpers/apiError/index.js';
+import type { IApiError } from '@helpers/apiError.js';
 
 function errorMiddleware(err: unknown, req: Request, res: Response, next: NextFunction) {
     if (err instanceof joi.ValidationError) {

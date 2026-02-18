@@ -1,9 +1,9 @@
 import express, { type Request, type Response } from 'express';
 import dotenv from 'dotenv'
 
-import gameRoutes from '@routes/game/index.js';
-import errorMiddleware from '@middlewares/error/index.js';
-import loggerMiddleware from '@middlewares/logger/index.js';
+import gameRoutes from '@routes/gameRoutes.js';
+import errorMiddleware from '@middlewares/error.js';
+import loggerMiddleware from '@middlewares/logger.js';
 
 dotenv.config();
 // initialize dotenv

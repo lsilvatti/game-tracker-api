@@ -1,8 +1,8 @@
-import { type IGameRepository} from '@repositories/game/index.js';
-import apiError from '@helpers/apiError/index.js';
-import type { CreateGameDTO, Game, GameCurrentState } from 'src/types/index.js';
+import type { GameRepository } from '@repositories/index.js';
+import apiError from '@helpers/apiError.js';
+import type { CreateGameDTO, Game, GameCurrentState } from '../types/game/index.js';
 
-export interface IGameService {
+export interface GameService {
     getAllGames: () => Promise<Game[]>;
     addGame: (game: CreateGameDTO) => Promise<Game>;
     deleteGame: (id: string) => Promise<boolean>;
@@ -10,7 +10,7 @@ export interface IGameService {
     changeGameStatus: (id: string, status: GameCurrentState) => Promise<Game | null>;
 }
 
-export default function gameService(repository: IGameRepository): IGameService {
+export default function gameService(repository: GameRepository): GameService {
 
     const getAllGames = async () => {
         const games = await repository.getAllGames();
