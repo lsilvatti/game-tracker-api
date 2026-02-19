@@ -18,6 +18,8 @@ const router = Router();
 router.post('/', bodyValidationMiddleware(gameSchema), controller.addGame);
 router.get('/', controller.getAllGames);
 router.delete('/:id', paramValidationMiddleware(idParamSchema), controller.deleteGame);
+
+// REVIEW - Talvez seja melhor usar get byId ou queryParams para buscar os jogos, ao invés de criar uma rota específica para busca. (usualmente acho que getById melhor,evita umas injection quando fica mt aberto a pesquisa)
 router.get('/search', queryValidationMiddleware(gameQuerySchema), controller.findGames);
 router.patch('/:id/status', paramValidationMiddleware(idParamSchema), bodyValidationMiddleware(gameStatusUpdateSchema), controller.changeGameStatus);
 

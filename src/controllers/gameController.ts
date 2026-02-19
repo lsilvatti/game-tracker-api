@@ -1,6 +1,10 @@
 import { type Request, type Response, type NextFunction } from 'express';
 import { type IGameService } from '@services/gameService.js';
 
+
+// review - aqui eu criaria um arquivo de erros customizados, para centralizar os erros da aplicação, e evitar ficar criando erros genéricos com mensagens diferentes. Assim fica mais fácil de tratar os erros na camada de controller, e também facilita a manutenção dos erros da aplicação.
+// outra obs: tiparia os retornos também
+// duvida, me parece que só ta roletando os erros internos, evitaria de lançar erros de validação ou erros de negócio como erros internos, para facilitar o tratamento dos erros na camada de controller, e também para evitar expor detalhes internos da aplicação para o cliente.
 export default function GameController(service: IGameService) { 
     const getAllGames = async (req: Request, res: Response, next: NextFunction) => {
         try { 
@@ -14,6 +18,7 @@ export default function GameController(service: IGameService) {
 
     const addGame = async (req: Request, res: Response, next: NextFunction) => {
         try {
+            
             const game = await service.addGame(req.body);
             return res.status(201).json(game);
 
