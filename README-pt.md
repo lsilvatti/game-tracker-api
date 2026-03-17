@@ -52,7 +52,7 @@ Baseada neste [repositório incrível](https://github.com/zabeu-engineer/back-to
 
 ## 📁 Estrutura do Projeto
 
-```
+```text
 game-tracker-api/
 ├── postgresql/
 │   └── compose.yaml          # Docker Compose para PostgreSQL
@@ -247,7 +247,7 @@ Você também pode acessar a especificação OpenAPI em `/docs.json`.
 
 O projeto segue o padrão de **arquitetura em camadas**:
 
-```
+```text
 ┌─────────────────────────────────────────────────────┐
 │                    Rotas                            │
 │         (Define endpoints e middlewares)            │
