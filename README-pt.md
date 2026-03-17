@@ -312,12 +312,6 @@ O projeto segue o padrão de **arquitetura em camadas**:
 
 ---
 
-## 📜 Licença
-
-Licença ISC - veja o arquivo [LICENSE](LICENSE) para detalhes.
-
----
-
 ## 👤 Autor
 
 **Leonardo Silvatti**
